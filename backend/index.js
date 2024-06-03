@@ -25,10 +25,9 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  
 });
 
-app.post("/create-account", async (req, res) => {
+app.post("/create-account", authenticateToken, async (req, res) => {
   const { fullName, email, password } = req.body;
 
   if (!fullName) {
@@ -193,7 +192,7 @@ app.get("/get-all-notes", authenticateToken, async (req, res) => {
       message: "Internal Server Error",
     });
   }
-});
+})  
 
 app.delete("/delete-note/:noteId", authenticateToken, async (req, res) => {
   const noteId = req.params.noteId;
